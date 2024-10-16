@@ -7,6 +7,18 @@ RTS - Project
 - Aliénor d'Irumberry de Salaberry
 - Clément Malige
 
+**TODO** :
+- [x] Check Database
+- [x] Tryout predefined functions
+- [x] First implementation of Girvain Newman Alg.
+- [ ] Dev Backend structure
+- [ ] Use Docker
+- [ ] Deploy to AWS using terraform
+- [ ] Implement Louvain Alg.
+- [ ] Implement Label Propagation Alg.
+- [ ] Tryout Clustering
+- [ ] Review all alg.
+
 ---
 ## Tools
 
