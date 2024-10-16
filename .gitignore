@@ -96,3 +96,6 @@ env/
 *.swp
 *.swo
 *~
+
+# Database
+Cisco_22_networks/
