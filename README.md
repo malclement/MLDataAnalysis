@@ -34,6 +34,13 @@ pip install -r requirements.txt
 ```
 
 ---
+### Run Backend Server
+
+```bash
+uvicorn main:app
+```
+
+---
 ## Tools
 
 ### Pre-commit
