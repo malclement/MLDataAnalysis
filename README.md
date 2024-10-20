@@ -20,6 +20,20 @@ RTS - Project
 - [ ] Review all alg.
 
 ---
+### Install Project
+
+1. Clone the project :
+```bash
+git clone git@github.com:malclement/MLDataAnalysis.git
+```
+
+2. Install the requirements :
+```bash
+cd MLDataAnalysis &&
+pip install -r requirements.txt
+```
+
+---
 ## Tools
 
 ### Pre-commit
