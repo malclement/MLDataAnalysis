@@ -11,8 +11,8 @@ RTS - Project
 - [x] Check Database
 - [x] Tryout predefined functions
 - [x] First implementation of Girvain Newman Alg.
-- [ ] Dev Backend structure
-- [ ] Use Docker
+- [x] Dev Backend structure
+- [x] Use Docker
 - [ ] Deploy to AWS using terraform
 - [ ] Implement Louvain Alg.
 - [ ] Implement Label Propagation Alg.
