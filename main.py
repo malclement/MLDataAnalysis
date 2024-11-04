@@ -17,3 +17,8 @@ async def root(request: Request):
 @app.get("/health", response_class=JSONResponse)
 async def health_check():
     return {"status": "healthy"}
+
+
+@app.get("/community", response_class=JSONResponse)
+async def run_community():
+    return {"status": "completed"}
