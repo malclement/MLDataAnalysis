@@ -1,3 +1,4 @@
+import gzip
 import os
 import random
 from typing import List
@@ -7,7 +8,19 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from networkx.algorithms.community import girvan_newman
 
-from community_detection import read_edges_with_ports_to_graph
+
+def read_edges_with_ports_to_graph(edges_file: str) -> nx.Graph:
+    G = nx.Graph()
+    with gzip.open(edges_file, mode="rt") as fopen:
+        for line in fopen:
+            if line.startswith("#"):  # skip comment lines
+                continue
+            parts = line.split()
+            if len(parts) < 3:
+                continue
+            node1, node2 = parts[1], parts[2]
+            G.add_edge(node1, node2)
+    return G
 
 
 def run_girvan_newman(G: nx.Graph) -> Tuple[List[str], ...]:
