@@ -4,6 +4,8 @@ from fastapi.responses import HTMLResponse
 from fastapi.responses import JSONResponse
 from starlette.templating import Jinja2Templates
 
+from backend.services.community_services import run_community_service
+
 app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
@@ -21,4 +23,4 @@ async def health_check():
 
 @app.get("/community", response_class=JSONResponse, tags=["Community"])
 async def run_community():
-    return {"status": "completed"}
+    return run_community_service()
