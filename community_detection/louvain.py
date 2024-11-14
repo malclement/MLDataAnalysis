@@ -58,3 +58,16 @@ if __name__ == "__main__":
     print(f"Detected communities: {partition}")
 
     draw_communities(G=G, partition=partition)
+
+
+def run(path: str):
+    edges_file = os.path.join(
+        os.getcwd(),
+        path,
+    )
+
+    G = read_edges_with_ports_to_graph(edges_file=edges_file)
+
+    communities = run_louvain(G)
+
+    return {"Detected communities": communities}
