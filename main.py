@@ -4,10 +4,10 @@ from fastapi.responses import HTMLResponse
 from fastapi.responses import JSONResponse
 from starlette.templating import Jinja2Templates
 
-from backend.services.community_services import get_ground_truth
 from backend.services.community_services import run_community_service
-from backend.services.custom_enums import CommunityAlgorithm
-from backend.services.custom_enums import FileSize
+from backend.services.ground_truth_services import ground_truth_service
+from backend.tools.custom_enums import CommunityAlgorithm
+from backend.tools.custom_enums import FileSize
 
 app = FastAPI()
 
@@ -33,4 +33,4 @@ async def run_community(
 
 @app.get("/gd", response_class=JSONResponse, tags=["Ground Truth"])
 async def ground_truth(file_size: FileSize = FileSize.SMALL):
-    return get_ground_truth(file_size=file_size)
+    return ground_truth_service(file_size=file_size)
