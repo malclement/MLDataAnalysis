@@ -6,17 +6,30 @@ import networkx as nx
 
 
 def read_edges_with_ports_to_graph(edges_file: str) -> nx.Graph:
-    graph = nx.Graph()
-    with gzip.open(edges_file, mode="rt") as fopen:
-        for line in fopen:
-            if line.startswith("#"):  # skip comment lines
+    """
+    Read a .txt.gz file containing edges with optional port information and create a NetworkX graph.
+    """
+    G = nx.Graph()
+
+    with gzip.open(edges_file, mode="rt") as f:
+        for line in f:
+            if line.startswith("#"):
                 continue
-            parts = line.split()
-            if len(parts) < 3:
+
+            parts = line.strip().split()
+
+            if len(parts) < 2:
                 continue
-            node1, node2 = parts[1], parts[2]
-            graph.add_edge(node1, node2)
-    return graph
+
+            source, target = parts[:2]
+
+            if len(parts) >= 3:
+                port = parts[2]
+                G.add_edge(source, target, port=port)
+            else:
+                G.add_edge(source, target)
+
+    return G
 
 
 def save_plot(plot: Any) -> io.BytesIO:

@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 from starlette.templating import Jinja2Templates
 
 from backend.services.community_services import CommunityAlgorithm
+from backend.services.community_services import FileSize
 from backend.services.community_services import run_community_service
 
 app = FastAPI()
@@ -23,5 +24,7 @@ async def health_check():
 
 
 @app.get("/community/{algorithm}", response_class=JSONResponse, tags=["Community"])
-async def run_community(algorithm: CommunityAlgorithm):
-    return run_community_service(algorithm=algorithm)
+async def run_community(
+    algorithm: CommunityAlgorithm, file_size: FileSize = FileSize.SMALL
+):
+    return run_community_service(algorithm=algorithm, file_size=file_size)
