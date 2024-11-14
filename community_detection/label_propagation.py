@@ -8,9 +8,19 @@ import networkx as nx
 from community_detection import read_edges_with_ports_to_graph
 
 
-def run_louvain(G: nx.Graph) -> Dict[str, int]:
-    # Using Louvain algorithm to partition the graph into communities
-    partition = nx.community.louvain_communities(G)
+def run_label_propagation(G: nx.Graph) -> Dict[str, int]:
+    """
+    Apply Label Propagation Algorithm to partition the graph into communities.
+    """
+    # Using NetworkX's built-in label propagation method
+    communities = nx.community.label_propagation_communities(G)
+
+    # Converting set-based communities to a dictionary format for visualization
+    partition = {}
+    for i, community in enumerate(communities):
+        for node in community:
+            partition[node] = i  # Assign each node to a community index
+
     return partition
 
 
@@ -40,7 +50,7 @@ def draw_communities(G: nx.Graph, partition: Dict[str, int]):
     nx.draw_networkx_edges(G, pos, alpha=0.5)
     nx.draw_networkx_labels(G, pos, font_size=10, font_color="black")
 
-    plt.title("Network with Louvain Communities")
+    plt.title("Network with Label Propagation Communities")
     plt.legend()
     plt.show()
 
@@ -54,7 +64,7 @@ if __name__ == "__main__":
 
     G = read_edges_with_ports_to_graph(edges_file)
 
-    partition = run_louvain(G)
+    partition = run_label_propagation(G)
     print(f"Detected communities: {partition}")
 
     draw_communities(G=G, partition=partition)
@@ -68,6 +78,6 @@ def run(path: str):
 
     G = read_edges_with_ports_to_graph(edges_file=edges_file)
 
-    communities = run_louvain(G)
+    communities = run_label_propagation(G)
 
     return {"Detected communities": communities}

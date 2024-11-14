@@ -67,3 +67,16 @@ if __name__ == "__main__":
     print(f"Detected communities: {communities}")
 
     draw_communities(G=G, communities=communities)
+
+
+def run(path: str):
+    edges_file = os.path.join(
+        os.getcwd(),
+        path,
+    )
+
+    G = read_edges_with_ports_to_graph(edges_file)
+
+    communities = run_girvan_newman(G)
+
+    return {"Detected communities": communities}
