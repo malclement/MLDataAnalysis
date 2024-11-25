@@ -4,11 +4,6 @@ RTS - Project
 
 **Title** :  Data Analysis of a Cisco Network using Machine Learning algorithms.
 
-**Students** :
-
-- Aliénor d'Irumberry de Salaberry
-- Clément Malige
-
 **TODO** :
 
 - [x] Check Database
@@ -16,9 +11,11 @@ RTS - Project
 - [x] First implementation of Girvain Newman Alg.
 - [x] Dev Backend structure
 - [x] Use Docker
+- [x] Implement Louvain Alg.
+- [x] Implement Label Propagation Alg.
+- [x] Implement Ground Truth
+- [ ] Implement Ground Truth Vizualisation
 - [ ] Deploy to AWS using terraform
-- [ ] Implement Louvain Alg.
-- [ ] Implement Label Propagation Alg.
 - [ ] Tryout Clustering
 - [ ] Review all alg.
 
