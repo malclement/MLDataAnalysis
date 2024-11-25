@@ -10,3 +10,4 @@ class CommunityAlgorithm(str, Enum):
 class FileSize(str, Enum):
     LARGE = "Large"
     SMALL = "Small"
+    TEST = "Test"
