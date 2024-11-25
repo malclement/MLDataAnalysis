@@ -1,12 +1,5 @@
 import gzip
-import os
 from collections import defaultdict
-
-import networkx as nx
-import plotly.graph_objects as go
-import plotly.io as pio
-from fastapi.responses import FileResponse
-from fastapi.responses import HTMLResponse
 
 from backend.tools.custom_enums import FileSize
 from backend.tools.path_selecter import path_selecter
