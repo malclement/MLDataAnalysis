@@ -104,3 +104,20 @@ git commit -m 'my_message' -n
    ```bash
    source env/bin/activate
    ```
+
+---
+
+## Usage
+
+- Run the project using Docker using docker commands
+- Run the project on your machine using :
+   ```bash
+   uvicorn main:app --reload
+   ```
+
+Once the project is running you can trigger the different endpoint directly using the documentation interface.
+
+For endpoints outputing vizualisation it is recommended to directly trigger the endpoint. For exemple :
+```url
+http://localhost:8000/gd/histogram?file_size=Test
+```
