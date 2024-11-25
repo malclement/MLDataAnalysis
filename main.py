@@ -6,10 +6,10 @@ from fastapi.responses import JSONResponse
 from starlette.templating import Jinja2Templates
 
 from backend.services.community_services import run_community_service
-from backend.services.gt_services import display_histogram_service
 from backend.services.gt_services import ground_truth_service
-from backend.services.gt_services import ground_truth_statistics_service
 from backend.services.gt_services import ground_truth_visualization_service
+from backend.services.gt_statistic_services import display_histogram_service
+from backend.services.gt_statistic_services import ground_truth_statistics_service
 from backend.tools.custom_enums import CommunityAlgorithm
 from backend.tools.custom_enums import FileSize
 
