@@ -36,6 +36,44 @@
             line-height: 1.6;
             color: #666;
         }
+        .button-container {
+            margin: 20px auto;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .api-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 15px 20px;
+            background-color: #e3f2fd; /* Light blue */
+            border: 1px solid #90caf9; /* Medium blue */
+            border-radius: 4px;
+            color: #1976d2; /* Dark blue */
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .api-button:hover {
+            background-color: #bbdefb;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .api-button span {
+            font-size: 16px;
+        }
+        .docs-button {
+            background-color: #e8f5e9; /* Light pastel green */
+            border: 1px solid #81c784; /* Medium green */
+            color: #388e3c; /* Dark green */
+        }
+        .docs-button:hover {
+            background-color: #c8e6c9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
         footer {
             text-align: center;
             padding: 10px;
@@ -46,6 +84,17 @@
             width: 100%;
         }
     </style>
+    <script>
+        async function callApi(endpoint) {
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                alert(`Response from ${endpoint}: ${JSON.stringify(data)}`);
+            } catch (error) {
+                alert(`Error calling ${endpoint}: ${error.message}`);
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -58,6 +107,35 @@
         <p>
             This project explores the use of machine learning algorithms to analyze data from a Cisco network.
         </p>
+
+        <div class="button-container">
+            <button class="api-button docs-button" onclick="window.location.href='/docs'">
+                <span>DOC</span>
+                <span></span>
+                <span></span>
+            </button>
+            <button class="api-button" onclick="callApi('/health')">
+                <span>GET</span>
+                <span></span>
+                <span>Health Check</span>
+            </button>
+
+            <button class="api-button" onclick="window.location.href='/gt/histogram?file_size=Small%204%20days'">
+                <span>Histogram</span>
+                <span></span>
+                <span>Small 4d</span>
+            </button>
+            <button class="api-button" onclick="window.location.href='/gt/histogram?file_size=Small%202%20days'">
+                <span>Histogram</span>
+                <span></span>
+                <span>Small 2d</span>
+            </button>
+            <button class="api-button" onclick="window.location.href='/gt/histogram?file_size=Small%2012%20hours'">
+                <span>Histogram</span>
+                <span></span>
+                <span>Small 12hrs</span>
+            </button>
+        </div>
     </section>
 
     <footer>
