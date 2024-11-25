@@ -35,12 +35,12 @@ async def run_community(
     return run_community_service(algorithm=algorithm, file_size=file_size)
 
 
-@app.get("/gd", response_class=JSONResponse, tags=["Ground Truth"])
+@app.get("/gt", response_class=JSONResponse, tags=["Ground Truth"])
 async def ground_truth(file_size: FileSize = FileSize.SMALL):
     return ground_truth_service(file_size=file_size)
 
 
-@app.get("/gd/visualize", response_class=HTMLResponse, tags=["Ground Truth"])
+@app.get("/gt/visualize", response_class=HTMLResponse, tags=["Ground Truth"])
 async def ground_truth_visualization(
     file_size: FileSize = FileSize.SMALL,
     save: bool = Query(False, description="Save as img"),
@@ -48,11 +48,11 @@ async def ground_truth_visualization(
     return ground_truth_visualization_service(file_size=file_size)
 
 
-@app.get("/gd/stats", response_class=JSONResponse, tags=["Ground Truth"])
+@app.get("/gt/stats", response_class=JSONResponse, tags=["Ground Truth"])
 async def ground_truth_statistics(file_size: FileSize = FileSize.SMALL):
     return ground_truth_statistics_service(file_size=file_size)
 
 
-@app.get("/gd/histogram", response_class=HTMLResponse, tags=["Ground Truth"])
+@app.get("/gt/histogram", response_class=HTMLResponse, tags=["Ground Truth"])
 async def ground_truth_histogram(file_size: FileSize = FileSize.SMALL):
     return display_histogram_service(file_size=file_size)
