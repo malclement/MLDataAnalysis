@@ -6,7 +6,6 @@ from starlette.templating import Jinja2Templates
 
 from backend.routes.gt_routes import gt_router
 from backend.services.community_services import run_community_service
-from backend.services.network_vizualisation_services import visualization_service
 from backend.tools.custom_enums import CommunityAlgorithm
 from backend.tools.custom_enums import FileSize
 
@@ -39,6 +38,8 @@ async def run_community(
     return run_community_service(algorithm=algorithm, file_size=file_size)
 
 
-@app.get("/viz", response_class=HTMLResponse)
-async def visualization(file_size: FileSize = FileSize.SMALL_2D):
-    return visualization_service(file_size=file_size)
+@app.get("/community/{algorithm}/viz", response_class=HTMLResponse, tags=["Community"])
+async def viz_community(
+    algorithm: CommunityAlgorithm, file_size: FileSize = FileSize.SMALL_2D
+):
+    return run_community_service(algorithm=algorithm, file_size=file_size, viz=True)
