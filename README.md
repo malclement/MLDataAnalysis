@@ -121,3 +121,15 @@ For endpoints outputing vizualisation it is recommended to directly trigger the 
 ```url
 http://localhost:8000/gd/histogram?file_size=Test
 ```
+
+## Run Test
+
+- Locate yourself at the root of the project
+- Run the command : 
+   ```bash
+   python -m unittest test.<file_name>
+   ```
+- Run a single test using :
+   ```bash
+   python -m unittest test.<file_name> -k <test_name>
+   ```
