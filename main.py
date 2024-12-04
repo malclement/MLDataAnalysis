@@ -4,21 +4,21 @@ from fastapi.responses import HTMLResponse
 from fastapi.responses import JSONResponse
 from starlette.templating import Jinja2Templates
 
+from backend.routes.community_routes import community_router
 from backend.routes.gt_routes import gt_router
-from backend.services.community_services import run_community_service
-from backend.tools.custom_enums import CommunityAlgorithm
-from backend.tools.custom_enums import FileSize
 
 app = FastAPI(
     title="Cisco Analysis - API",
     description="API to trigger cisco analysis mechanism",
     version="1.0.0",
     redoc_url="/docs",
+    contact="clement.malige@ensea.fr",
 )
 
 templates = Jinja2Templates(directory="templates")
 
-app.include_router(gt_router)
+app.include_router(router=gt_router)
+app.include_router(router=community_router)
 
 
 @app.get("/", response_class=HTMLResponse, tags=["Base"])
