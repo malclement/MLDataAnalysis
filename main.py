@@ -39,6 +39,13 @@ async def run_community(
     return run_community_service(algorithm=algorithm, file_size=file_size)
 
 
+@app.get("/community/{algorithm}/viz", response_class=HTMLResponse, tags=["Community"])
+async def viz_community(
+    algorithm: CommunityAlgorithm, file_size: FileSize = FileSize.SMALL_2D
+):
+    return run_community_service(algorithm=algorithm, file_size=file_size, viz=True)
+
+
 @app.get("/viz", response_class=HTMLResponse)
 async def visualization(file_size: FileSize = FileSize.SMALL_2D):
     return visualization_service(file_size=file_size)

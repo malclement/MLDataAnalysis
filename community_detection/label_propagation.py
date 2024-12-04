@@ -2,8 +2,8 @@ import os
 import random
 from typing import Dict
 
-import matplotlib.pyplot as plt
 import networkx as nx
+import plotly.graph_objects as go
 
 from community_detection import read_edges_with_ports_to_graph
 
@@ -24,35 +24,74 @@ def run_label_propagation(G: nx.Graph) -> Dict[str, int]:
     return partition
 
 
-def draw_communities(G: nx.Graph, partition: Dict[str, int]):
-    pos = nx.spring_layout(G)  # Positioning for nodes
+def create_html_visualization(
+    G: nx.Graph,
+    partition: Dict[str, int],
+    title: str = "Network with Label Propagation Communities",
+) -> str:
+    # Node positions for visualization
+    pos = nx.spring_layout(G)
 
-    # Unique communities
-    unique_communities = set(partition.values())
-    colors = [f"#{random.randint(0, 0xFFFFFF):06x}" for _ in unique_communities]
-    color_map = {
-        community: colors[idx] for idx, community in enumerate(unique_communities)
-    }
+    # Create edge trace for visualization
+    edge_trace = go.Scatter(
+        x=[],
+        y=[],
+        line=dict(width=0.5, color="#888"),
+        hoverinfo="none",
+        mode="lines",
+    )
 
-    plt.figure(figsize=(10, 10))
+    for edge in G.edges():
+        x0, y0 = pos[edge[0]]
+        x1, y1 = pos[edge[1]]
+        edge_trace["x"] += (x0, x1, None)
+        edge_trace["y"] += (y0, y1, None)
 
-    # Drawing nodes with colors based on their community
-    for node, community in partition.items():
-        nx.draw_networkx_nodes(
-            G,
-            pos,
-            nodelist=[node],
-            node_color=color_map[community],
-            node_size=500,
-            label=f"Community {community}",
-        )
+    # Create node trace with color for communities
+    node_trace = go.Scatter(
+        x=[],
+        y=[],
+        text=[],
+        mode="markers",
+        hoverinfo="text",
+        marker=dict(
+            showscale=True,
+            colorscale="Viridis",
+            color=[],
+            size=10,
+            colorbar=dict(
+                thickness=15,
+                title="Community",
+                xanchor="left",
+                titleside="right",
+            ),
+        ),
+    )
 
-    nx.draw_networkx_edges(G, pos, alpha=0.5)
-    nx.draw_networkx_labels(G, pos, font_size=10, font_color="black")
+    for node in G.nodes():
+        x, y = pos[node]
+        node_trace["x"] += (x,)
+        node_trace["y"] += (y,)
+        # Color nodes by their community
+        node_trace["marker"]["color"] += (partition[node],)
+        node_trace["text"] += (f"Node {node}<br>Community {partition[node]}",)
 
-    plt.title("Network with Label Propagation Communities")
-    plt.legend()
-    plt.show()
+    # Build the figure
+    fig = go.Figure(
+        data=[edge_trace, node_trace],
+        layout=go.Layout(
+            title=title,
+            titlefont_size=16,
+            showlegend=False,
+            hovermode="closest",
+            margin=dict(l=0, r=0, b=0, t=40),
+            xaxis=dict(showgrid=False, zeroline=False),
+            yaxis=dict(showgrid=False, zeroline=False),
+        ),
+    )
+
+    # Return the figure as an HTML string
+    return fig.to_html(full_html=False)
 
 
 if __name__ == "__main__":
@@ -67,7 +106,9 @@ if __name__ == "__main__":
     partition = run_label_propagation(G)
     print(f"Detected communities: {partition}")
 
-    draw_communities(G=G, partition=partition)
+    html_output = create_html_visualization(G=G, partition=partition)
+    with open("network_visualization.html", "w") as f:
+        f.write(html_output)
 
 
 def run(path: str):
@@ -78,6 +119,20 @@ def run(path: str):
 
     G = read_edges_with_ports_to_graph(edges_file=edges_file)
 
-    communities = run_label_propagation(G)
+    partition = run_label_propagation(G)
 
-    return {"Detected communities": communities}
+    return {"Detected communities": partition}
+
+
+def run_viz(path: str):
+    edges_file = os.path.join(
+        os.getcwd(),
+        path,
+    )
+
+    G = read_edges_with_ports_to_graph(edges_file=edges_file)
+
+    partition = run_label_propagation(G)
+
+    html_output = create_html_visualization(G=G, partition=partition)
+    return html_output
