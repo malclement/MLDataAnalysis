@@ -22,6 +22,7 @@ class GroundTruthTestCase(TestCase):
         self.assertIsInstance(json_data["node_gt"], dict)
         self.assertIsInstance(json_data["gt_to_nodes"], dict)
 
+    #TODO: Fix
     def test_get_ground_truth_with_valid_file_size(self):
         response = client.get(f"/gt/?file_size={self.valid_file_size}")
         self.assertEqual(response.status_code, 200)
@@ -29,6 +30,7 @@ class GroundTruthTestCase(TestCase):
         self.assertIn("node_gt", json_data)
         self.assertIn("gt_to_nodes", json_data)
 
+    #TODO: Fix
     def test_get_ground_truth_with_invalid_file_size(self):
         response = client.get(f"/gt/?file_size={self.invalid_file_size}")
         self.assertEqual(response.status_code, 422)
