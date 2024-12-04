@@ -12,7 +12,6 @@ app = FastAPI(
     description="API to trigger cisco analysis mechanism",
     version="1.0.0",
     redoc_url="/docs",
-    contact="clement.malige@ensea.fr",
 )
 
 templates = Jinja2Templates(directory="templates")
