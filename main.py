@@ -29,17 +29,3 @@ async def root(request: Request):
 @app.get("/health", response_class=JSONResponse, tags=["Base"])
 async def health_check():
     return {"status": "healthy"}
-
-
-@app.get("/community/{algorithm}", response_class=JSONResponse, tags=["Community"])
-async def run_community(
-    algorithm: CommunityAlgorithm, file_size: FileSize = FileSize.SMALL_2D
-):
-    return run_community_service(algorithm=algorithm, file_size=file_size)
-
-
-@app.get("/community/{algorithm}/viz", response_class=HTMLResponse, tags=["Community"])
-async def viz_community(
-    algorithm: CommunityAlgorithm, file_size: FileSize = FileSize.SMALL_2D
-):
-    return run_community_service(algorithm=algorithm, file_size=file_size, viz=True)
