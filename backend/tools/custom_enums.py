@@ -5,6 +5,9 @@ class CommunityAlgorithm(str, Enum):
     GIRVAN_NEWMAN = "Girvan-Newman"
     LOUVAIN = "Louvain"
     LABEL_PROPAGATION = "Label Propagation"
+    SPECTRAL = "Spectral Clustering"
+    MODULARITY = "Modularity Maximization"
+    KERNIGHAN_LIN = "Kernighan-Lin"
 
 
 class FileSize(str, Enum):
