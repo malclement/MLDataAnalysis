@@ -3,6 +3,7 @@ from fastapi import Request
 from fastapi.responses import HTMLResponse
 from fastapi.responses import JSONResponse
 from starlette.templating import Jinja2Templates
+from magnum import Mangum
 
 from backend.routes.community_routes import community_router
 from backend.routes.gt_routes import gt_router
@@ -28,3 +29,6 @@ async def root(request: Request):
 @app.get("/health", response_class=JSONResponse, tags=["Base"])
 async def health_check():
     return {"status": "healthy"}
+
+
+handler = Mangum(app)
