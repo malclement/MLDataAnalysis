@@ -100,3 +100,17 @@ env/
 
 # Database
 Cisco_22_networks/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*.override.tf
+*.override.tf.json
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+*.tfvars.json
+*.backup
