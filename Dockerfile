@@ -22,4 +22,6 @@ EXPOSE 8000
 ENV PYTHONUNBUFFERED=1
 
 # Run uvicorn server
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
+CMD ["./start.sh"]
