@@ -188,7 +188,7 @@ resource "aws_lb_target_group" "fastapi_tg" {
   target_type = "ip"
 
   health_check {
-    path                = "/" # Adjust to your health check endpoint
+    path                = "/health"
     healthy_threshold   = 2
     unhealthy_threshold = 10
     timeout             = 60
@@ -215,8 +215,6 @@ resource "aws_ecs_service" "fastapi_ecs_service" {
   cluster         = aws_ecs_cluster.ECS_Cluster.id
   task_definition = aws_ecs_task_definition.fargate_task.arn
   desired_count   = 1
-
-  # Removed launch_type and adjusted capacity provider strategy
   capacity_provider_strategy {
     capacity_provider = "FARGATE_SPOT"
     weight            = 100
@@ -244,7 +242,7 @@ resource "aws_ecs_service" "fastapi_ecs_service" {
 # CloudWatch Log Group
 resource "aws_cloudwatch_log_group" "ecs_log_group" {
   name              = "/ecs/fastapi-service"
-  retention_in_days = 7 # Retain logs for 7 days; adjust as needed
+  retention_in_days = 7
 }
 
 # Outputs
