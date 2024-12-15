@@ -4,21 +4,6 @@ RTS - Project
 
 **Title** :  Data Analysis of a Cisco Network using Machine Learning algorithms.
 
-**TODO** :
-
-- [x] Check Database
-- [x] Tryout predefined functions
-- [x] First implementation of Girvain Newman Alg.
-- [x] Dev Backend structure
-- [x] Use Docker
-- [x] Implement Louvain Alg.
-- [x] Implement Label Propagation Alg.
-- [x] Implement Ground Truth
-- [ ] Implement Ground Truth Vizualisation
-- [ ] Deploy to AWS using terraform
-- [ ] Tryout Clustering
-- [ ] Review all alg.
-
 ---
 
 ### Install Project
@@ -121,3 +106,8 @@ For endpoints outputing vizualisation it is recommended to directly trigger the 
 ```url
 http://localhost:8000/gd/histogram?file_size=Test
 ```
+
+## Deployed Versions 
+
+- Heroku : https://ml-analysis-751e2972b3a3.herokuapp.com
+- AWS : http://fastapi-application-lb-1541022285.eu-west-3.elb.amazonaws.com
