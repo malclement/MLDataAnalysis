@@ -106,8 +106,3 @@ For endpoints outputing vizualisation it is recommended to directly trigger the 
 ```url
 http://localhost:8000/gd/histogram?file_size=Test
 ```
-
-## Deployed Versions 
-
-- Heroku : https://ml-analysis-751e2972b3a3.herokuapp.com
-- AWS : http://fastapi-application-lb-1541022285.eu-west-3.elb.amazonaws.com
